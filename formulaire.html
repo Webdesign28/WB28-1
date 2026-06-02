@@ -4,260 +4,153 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Démarrer mon site — Webdesign28</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F5F2EC;
-  --surface:#FFFFFF;
-  --border:#E0DAD0;
-  --text:#0F0D0A;
-  --muted:#8A7F72;
-  --accent:#FF4D1C;
-  --accent-light:#FFF0EB;
-  --dark:#0F0D0A;
-  --radius:12px;
-  --font-display:'Syne',sans-serif;
-  --font-body:'DM Sans',sans-serif;
+  --white:#FFFFFF;--bg:#F8F9FB;--border:#E8ECF0;
+  --text:#0D1117;--muted:#6B7280;--light:#9CA3AF;
+  --accent:#FF4D1C;--font:'Plus Jakarta Sans',sans-serif;--radius:12px;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
 
-/* ── SPLASH ── */
-#splash{
-  position:fixed;inset:0;z-index:9999;
-  background:var(--dark);
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;
-}
-#splash.hide{animation:splashOut .6s cubic-bezier(.4,0,.2,1) forwards}
-@keyframes splashOut{to{opacity:0;transform:scale(1.04);pointer-events:none}}
-.splash-logo{
-  font-family:var(--font-display);font-size:2.5rem;font-weight:800;
-  color:white;letter-spacing:-.03em;
-  opacity:0;animation:fadeUp .6s ease .3s forwards;
-}
-.splash-logo span{opacity:.4;font-weight:400}
-.splash-sub{
-  font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;
-  color:rgba(255,255,255,.3);
-  opacity:0;animation:fadeUp .5s ease .7s forwards;
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:9999;background:var(--text);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+#splash.out{animation:sOut .5s ease forwards}
+@keyframes sOut{to{opacity:0;pointer-events:none}}
+.sp-logo{display:flex;align-items:center;gap:12px;opacity:0;animation:sUp .5s ease .2s forwards}
+.sp-name{font-size:1.6rem;font-weight:800;color:white;letter-spacing:-.03em}
+.sp-name span{opacity:.4;font-weight:500}
+.sp-sub{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);opacity:0;animation:sUp .4s ease .5s forwards}
+@keyframes sUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── HEADER ── */
-.header{
-  background:var(--dark);color:white;
-  padding:20px 40px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100;
-}
-.header-logo{
-  font-family:var(--font-display);font-size:1.15rem;font-weight:800;
-  color:white;text-decoration:none;letter-spacing:-.02em;
-}
-.header-logo span{opacity:.4;font-weight:400}
-.header-sub{font-size:.8rem;color:rgba(255,255,255,.4);font-weight:300}
+/* HEADER */
+.header{background:var(--text);height:64px;padding:0 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.h-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.h-name{font-size:1rem;font-weight:800;color:white;letter-spacing:-.02em}
+.h-name span{opacity:.4;font-weight:500}
+.h-sub{font-size:.8rem;color:rgba(255,255,255,.35)}
 
-/* ── PROGRESS ── */
-.progress-wrap{
-  background:white;border-bottom:1px solid var(--border);
-  padding:0 40px;position:sticky;top:62px;z-index:99;
-}
-.progress-steps{display:flex;max-width:800px;margin:0 auto}
-.step-tab{
-  flex:1;padding:14px 8px;
-  font-size:.78rem;font-weight:500;
-  color:var(--muted);text-align:center;
-  border-bottom:2px solid transparent;
-  cursor:pointer;transition:all .2s;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.step-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.step-tab.done{color:var(--dark);border-bottom-color:var(--dark)}
+/* PROGRESS */
+.progress{background:var(--white);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:64px;z-index:99}
+.progress-inner{display:flex;max-width:820px;margin:0 auto}
+.tab{flex:1;padding:14px 6px;font-size:.75rem;font-weight:600;color:var(--light);text-align:center;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab.done{color:var(--text);border-bottom-color:var(--text)}
 
-/* ── MAIN ── */
-.main{max-width:800px;margin:0 auto;padding:48px 20px 100px}
-.page{display:none;animation:pageIn .35s ease}
+/* MAIN */
+.main{max-width:820px;margin:0 auto;padding:48px 20px 100px}
+.page{display:none;animation:pIn .3s ease}
 .page.active{display:block}
-@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-.page-title{
-  font-family:var(--font-display);font-size:2rem;font-weight:800;
-  line-height:1.05;letter-spacing:-.03em;margin-bottom:6px;
-}
-.page-desc{font-size:.9rem;color:var(--muted);margin-bottom:36px;font-weight:300;line-height:1.6}
+.pg-title{font-size:1.75rem;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+.pg-desc{font-size:.9rem;color:var(--muted);margin-bottom:36px;line-height:1.6}
 
-/* ── OFFER SELECTOR (page 0) ── */
-.offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+/* OFFER CARDS */
+.offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
 .offer-card{
-  background:var(--surface);border:2px solid var(--border);border-radius:16px;
-  overflow:hidden;cursor:pointer;
-  transition:border-color .25s,transform .2s,box-shadow .2s;
+  background:var(--white);border:2px solid var(--border);border-radius:16px;
+  overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s;
   position:relative;
 }
-.offer-card:hover{border-color:#C8C0B0;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.offer-card:hover{border-color:#C8D0E0;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.07)}
 .offer-card.selected{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,77,28,.1)}
-.offer-card.selected.offer-premium{border-color:var(--dark)}
-.offer-card.selected.offer-premium{box-shadow:0 0 0 3px rgba(15,13,10,.1)}
+.offer-card.selected.premium{border-color:var(--text);box-shadow:0 0 0 3px rgba(13,17,23,.08)}
 .offer-card input[type=radio]{display:none}
-
-.offer-top{padding:28px 28px 20px;position:relative}
-.offer-badge{
-  display:inline-block;
-  font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
-  padding:3px 10px;border-radius:4px;margin-bottom:16px;
-}
-.offer-basic .offer-badge{background:rgba(255,77,28,.08);color:var(--accent);border:1px solid rgba(255,77,28,.15)}
-.offer-premium .offer-badge{background:var(--dark);color:white}
-
-.offer-name{
-  font-family:var(--font-display);font-size:1.4rem;font-weight:800;
-  margin-bottom:12px;letter-spacing:-.02em;
-}
-.offer-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:6px}
-.offer-price{font-family:var(--font-display);font-size:2.8rem;font-weight:800;line-height:1}
-.offer-per{font-size:.85rem;color:var(--muted);font-weight:300}
-.offer-old{font-size:.8rem;color:#C0B8AC;text-decoration:line-through;margin-left:4px}
-.offer-desc{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:8px}
-
-.offer-sep{height:1px;background:var(--border);margin:0 28px}
-
-.offer-body{padding:20px 28px 28px}
-.offer-feats{list-style:none;display:flex;flex-direction:column;gap:8px}
-.offer-feats li{
-  display:flex;align-items:center;gap:10px;
-  font-size:.82rem;color:var(--muted);
-}
-.offer-feats li::before{
-  content:'→';flex-shrink:0;
-  font-size:.75rem;color:var(--muted);
-  width:14px;
-}
-.offer-card.selected .offer-feats li::before{color:var(--accent)}
-.offer-card.selected.offer-premium .offer-feats li::before{color:var(--dark)}
-
-.offer-check{
-  position:absolute;top:16px;right:16px;
-  width:24px;height:24px;border-radius:50%;
-  border:2px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;color:white;
-  transition:all .2s;background:white;
-}
+.offer-check{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:white;transition:all .2s}
 .offer-card.selected .offer-check{background:var(--accent);border-color:var(--accent)}
-.offer-card.selected.offer-premium .offer-check{background:var(--dark);border-color:var(--dark)}
+.offer-card.selected.premium .offer-check{background:var(--text);border-color:var(--text)}
+.offer-head{padding:24px 24px 16px}
+.offer-badge{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:14px}
+.offer-card .offer-badge{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+.offer-card.selected .offer-badge,.offer-card:hover .offer-badge{background:#FFF0EB;color:var(--accent);border-color:#FFDDD4}
+.offer-card.selected.premium .offer-badge,.offer-card.premium:hover .offer-badge{background:var(--text);color:white;border-color:var(--text)}
+.offer-name{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.offer-price-row{display:flex;align-items:baseline;gap:5px}
+.offer-price{font-size:2.5rem;font-weight:800;letter-spacing:-.04em;line-height:1}
+.offer-per{font-size:.85rem;color:var(--muted)}
+.offer-old{font-size:.78rem;color:var(--light);text-decoration:line-through;margin-left:4px}
+.offer-desc{font-size:.82rem;color:var(--muted);line-height:1.6;margin-top:8px}
+.offer-sep{height:1px;background:var(--border);margin:0 24px}
+.offer-body{padding:16px 24px 24px}
+.offer-feats{list-style:none;display:flex;flex-direction:column;gap:7px}
+.offer-feats li{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.offer-feats li::before{content:'✓';flex-shrink:0;width:16px;height:16px;border-radius:4px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--muted)}
+.offer-card.selected .offer-feats li::before{background:#FFF0EB;border-color:#FFDDD4;color:var(--accent)}
+.offer-card.selected.premium .offer-feats li::before{background:var(--text);border-color:var(--text);color:white}
 
-/* SELECTED BANNER */
-.selected-banner{
-  display:none;
-  background:var(--accent-light);border:1px solid rgba(255,77,28,.2);
-  border-radius:10px;padding:14px 18px;
-  font-size:.875rem;font-weight:500;color:var(--accent);
-  align-items:center;gap:10px;margin-bottom:24px;
-}
+.selected-banner{display:none;background:#FFF0EB;border:1px solid #FFDDD4;border-radius:10px;padding:12px 18px;font-size:.875rem;font-weight:600;color:var(--accent);align-items:center;gap:10px;margin-bottom:24px}
 .selected-banner.show{display:flex}
 
-/* ── CARD ── */
-.card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:28px;margin-bottom:20px;
-}
-.card-title{
-  font-size:.72rem;font-weight:700;text-transform:uppercase;
-  letter-spacing:.1em;color:var(--muted);margin-bottom:20px;
-}
+/* CARD */
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px}
+.card-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:20px}
 
-/* ── FIELDS ── */
+/* FIELDS */
 .field{margin-bottom:18px}
 .field:last-child{margin-bottom:0}
-label{display:block;font-size:.82rem;font-weight:500;margin-bottom:6px;color:var(--text)}
+label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--text)}
 .req{color:var(--accent);margin-left:2px}
 input[type=text],input[type=email],input[type=tel],input[type=url],input[type=number],select,textarea{
-  width:100%;padding:11px 14px;
-  border:1px solid var(--border);border-radius:8px;
-  font-family:var(--font-body);font-size:.875rem;
-  color:var(--text);background:white;
-  outline:none;appearance:none;
-  transition:border-color .15s,box-shadow .15s;
+  width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;
+  font-family:var(--font);font-size:.875rem;color:var(--text);background:var(--white);
+  outline:none;appearance:none;transition:border-color .15s,box-shadow .15s;
 }
-input:focus,select:focus,textarea:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(255,77,28,.08);
-}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,77,28,.07)}
 textarea{resize:vertical;min-height:90px}
-.hint{font-size:.78rem;color:var(--muted);margin-top:5px;line-height:1.5}
+.hint{font-size:.78rem;color:var(--light);margin-top:5px;line-height:1.5}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:540px){.row{grid-template-columns:1fr}}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
 
-select{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238A7F72' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
-}
-
-/* ── PILLS ── */
+/* PILLS */
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.pill{
-  padding:7px 16px;border:1px solid var(--border);border-radius:100px;
-  font-size:.82rem;cursor:pointer;transition:all .15s;user-select:none;background:white;
-}
+.pill{padding:7px 16px;border:1.5px solid var(--border);border-radius:100px;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .15s;user-select:none;background:var(--white)}
 .pill input{display:none}
-.pill:has(input:checked),.pill.selected{background:var(--accent);border-color:var(--accent);color:white}
+.pill:has(input:checked){background:var(--accent);border-color:var(--accent);color:white}
 
-/* ── DAYS ── */
-.days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:8px}
-.day-pill{
-  text-align:center;padding:8px 4px;border:1px solid var(--border);border-radius:8px;
-  font-size:.75rem;font-weight:600;cursor:pointer;transition:all .15s;background:white;
-}
-.day-pill input{display:none}
-.day-pill:has(input:checked){background:var(--dark);border-color:var(--dark);color:white}
-
-/* ── SWATCHES ── */
+/* COLORS */
 .color-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:8px}
-.swatch{
-  width:32px;height:32px;border-radius:50%;cursor:pointer;
-  border:2px solid transparent;transition:transform .15s,border-color .15s;
-}
-.swatch:hover{transform:scale(1.1)}
-.swatch.selected{border-color:var(--dark);box-shadow:0 0 0 2px white inset}
+.swatch{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s}
+.swatch:hover{transform:scale(1.12)}
+.swatch.selected{border-color:var(--text);box-shadow:0 0 0 2px white inset}
+.preview-bar{height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-top:8px;transition:background .2s}
+.preview-bar span{font-size:.78rem;font-weight:700;font-family:monospace}
 
-/* ── NAV BUTTONS ── */
+/* NAV */
 .nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:36px;gap:12px}
-.btn{
-  padding:13px 28px;border-radius:100px;
-  font-family:var(--font-display);font-size:.9rem;font-weight:700;
-  cursor:pointer;border:none;transition:all .15s;letter-spacing:.01em;
-}
-.btn-prev{background:white;border:1px solid var(--border);color:var(--muted)}
-.btn-prev:hover{border-color:var(--dark);color:var(--dark)}
-.btn-next{background:var(--accent);color:white;margin-left:auto}
+.btn{padding:12px 28px;border-radius:100px;font-family:var(--font);font-size:.9rem;font-weight:700;cursor:pointer;border:none;transition:all .15s;letter-spacing:-.01em}
+.btn-prev{background:var(--white);border:1.5px solid var(--border);color:var(--muted)}
+.btn-prev:hover{border-color:var(--text);color:var(--text)}
+.btn-next{background:var(--accent);color:white;margin-left:auto;box-shadow:0 4px 14px rgba(255,77,28,.2)}
 .btn-next:hover{background:#e03d10;transform:translateY(-1px)}
-.btn-submit{background:var(--dark);color:white;padding:15px 40px;font-size:1rem;margin-left:auto}
-.btn-submit:hover{background:#333;transform:translateY(-1px)}
+.btn-submit{background:var(--text);color:white;padding:14px 36px;font-size:.95rem;margin-left:auto}
+.btn-submit:hover{background:#222;transform:translateY(-1px)}
 
-/* ── BLUE INFO BOX ── */
-.info-box{
-  background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;
-  padding:16px;font-size:.82rem;color:#1E40AF;line-height:1.7;margin-bottom:20px;
-}
-.neutral-box{
-  background:#FAFAF8;border:1px solid var(--border);border-radius:10px;
-  padding:14px;font-size:.82rem;color:var(--muted);
-}
-.neutral-box ul{margin-left:16px;margin-top:6px;line-height:2}
+/* INFO BOXES */
+.info-blue{background:#EFF6FF;border:1.5px solid #BFDBFE;border-radius:10px;padding:14px 16px;font-size:.82rem;color:#1E40AF;line-height:1.7;margin-bottom:16px}
+.info-gray{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;font-size:.82rem;color:var(--muted)}
+.info-gray ul{margin-left:16px;margin-top:6px;line-height:2}
 
-/* ── SCHEDULE ── */
-#schedule-builder .sched-row{
-  display:grid;grid-template-columns:100px 1fr;
-  align-items:center;gap:12px;padding:10px 0;
-  border-bottom:1px solid var(--border);
-}
+/* RECAP */
+.recap-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:var(--text);color:white;border-radius:12px;padding:18px 24px;margin-bottom:20px}
+.recap-label{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.4;margin-bottom:4px}
+.recap-value{font-size:1.1rem;font-weight:800;letter-spacing:-.02em}
+.recap-change{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:7px 14px;border-radius:8px;font-size:.78rem;font-weight:500;cursor:pointer;font-family:var(--font)}
 
-/* ── MOBILE ── */
+/* SCHEDULE */
+.sched-header{display:grid;grid-template-columns:100px 1fr;gap:12px;padding-bottom:8px;border-bottom:2px solid var(--border);margin-bottom:4px}
+.sched-header-labels{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;font-size:.68rem;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.05em}
+.sched-row{display:grid;grid-template-columns:100px 1fr;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.sched-hours{display:none;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.sched-closed{font-size:.82rem;color:var(--light)}
+
 @media(max-width:600px){
   .offer-grid{grid-template-columns:1fr}
-  .header{padding:16px 20px}
-  .progress-wrap{padding:0 16px}
+  .header{padding:0 20px}
+  .progress{padding:0 16px}
   .main{padding:32px 16px 80px}
 }
 </style>
@@ -266,55 +159,65 @@ select{
 
 <!-- SPLASH -->
 <div id="splash">
-  <div class="splash-logo">web<span>design</span>28</div>
-  <div class="splash-sub">Formulaire client</div>
+  <div class="sp-logo">
+    <svg width="36" height="36" viewBox="0 0 54 54">
+      <rect x="0" y="0" width="38" height="38" rx="5" fill="none" stroke="white" stroke-width="2.5"/>
+      <rect x="10" y="10" width="38" height="38" rx="5" fill="white"/>
+      <rect x="10" y="10" width="28" height="28" rx="3" fill="#0D1117"/>
+      <circle cx="24" cy="24" r="5" fill="white"/>
+    </svg>
+    <div class="sp-name">web<span>design</span>28</div>
+  </div>
+  <div class="sp-sub">Formulaire client</div>
 </div>
 
 <!-- HEADER -->
 <header class="header">
-  <a href="index.html" class="header-logo">web<span>design</span>28</a>
-  <div class="header-sub">Formulaire d'intégration client</div>
+  <a href="index.html" class="h-logo">
+    <svg width="28" height="28" viewBox="0 0 54 54">
+      <rect x="0" y="0" width="38" height="38" rx="5" fill="none" stroke="white" stroke-width="2.5"/>
+      <rect x="10" y="10" width="38" height="38" rx="5" fill="white"/>
+      <rect x="10" y="10" width="28" height="28" rx="3" fill="#0D1117"/>
+      <circle cx="24" cy="24" r="5" fill="white"/>
+    </svg>
+    <div class="h-name">web<span>design</span>28</div>
+  </a>
+  <div class="h-sub">Formulaire d'intégration client</div>
 </header>
 
-<!-- PROGRESS BAR -->
-<div class="progress-wrap">
-  <div class="progress-steps">
-    <div class="step-tab active" onclick="goTo(0)">Offre</div>
-    <div class="step-tab" onclick="goTo(1)">Restaurant</div>
-    <div class="step-tab" onclick="goTo(2)">Horaires</div>
-    <div class="step-tab" onclick="goTo(3)">Visuels</div>
-    <div class="step-tab" onclick="goTo(4)">Menu</div>
-    <div class="step-tab" onclick="goTo(5)">Technique</div>
-    <div class="step-tab" onclick="goTo(6)">Légal</div>
-    <div class="step-tab" onclick="goTo(7)">Finalisation</div>
+<!-- PROGRESS -->
+<div class="progress">
+  <div class="progress-inner">
+    <div class="tab active" onclick="goTo(0)">Offre</div>
+    <div class="tab" onclick="goTo(1)">Restaurant</div>
+    <div class="tab" onclick="goTo(2)">Horaires</div>
+    <div class="tab" onclick="goTo(3)">Visuels</div>
+    <div class="tab" onclick="goTo(4)">Menu</div>
+    <div class="tab" onclick="goTo(5)">Technique</div>
+    <div class="tab" onclick="goTo(6)">Légal</div>
+    <div class="tab" onclick="goTo(7)">Finalisation</div>
   </div>
 </div>
 
 <div class="main">
 <form id="mainForm" action="https://formspree.io/f/xaqkdzba" method="POST" novalidate>
-  <input type="hidden" name="_subject" value="🍽️ Nouveau client Webdesign28 !" />
-  <input type="hidden" name="_next" id="next-url" value="" />
-  <input type="text" name="_gotcha" style="display:none" />
-  <input type="hidden" name="offre_choisie" id="offre-hidden" value="" />
+  <input type="hidden" name="_subject" value="🍽️ Nouveau client Webdesign28 !"/>
+  <input type="hidden" name="_next" id="next-url" value=""/>
+  <input type="text" name="_gotcha" style="display:none"/>
+  <input type="hidden" name="offre_choisie" id="offre-hidden" value=""/>
 
-  <!-- ════ PAGE 0 — CHOIX OFFRE ════ -->
+  <!-- PAGE 0 — OFFRE -->
   <div class="page active" id="page-0">
-    <div class="page-title">Choisissez votre offre</div>
-    <div class="page-desc">Commencez par sélectionner la formule qui correspond à vos besoins. Vous pourrez changer à tout moment.</div>
-
+    <div class="pg-title">Choisissez votre offre</div>
+    <div class="pg-desc">Sélectionnez la formule qui correspond à vos besoins. Vous pourrez changer à tout moment.</div>
     <div class="offer-grid">
-
-      <!-- BASIQUE -->
-      <label class="offer-card offer-basic" id="card-basic" onclick="selectOffer('basique',this)">
-        <input type="radio" name="offre" value="basique" />
+      <label class="offer-card" id="card-basic" onclick="selectOffer('basique',this)">
+        <input type="radio" name="offre" value="basique"/>
         <div class="offer-check">✓</div>
-        <div class="offer-top">
+        <div class="offer-head">
           <div class="offer-badge">Starter</div>
           <div class="offer-name">Basique</div>
-          <div class="offer-price-row">
-            <span class="offer-price">45€</span>
-            <span class="offer-per">/mois</span>
-          </div>
+          <div class="offer-price-row"><span class="offer-price">59€</span><span class="offer-per">/mois</span></div>
           <p class="offer-desc">L'essentiel pour être visible en ligne.</p>
         </div>
         <div class="offer-sep"></div>
@@ -328,19 +231,13 @@ select{
           </ul>
         </div>
       </label>
-
-      <!-- PREMIUM -->
-      <label class="offer-card offer-premium" id="card-premium" onclick="selectOffer('premium',this)">
-        <input type="radio" name="offre" value="premium" />
+      <label class="offer-card premium" id="card-premium" onclick="selectOffer('premium',this)">
+        <input type="radio" name="offre" value="premium"/>
         <div class="offer-check">✓</div>
-        <div class="offer-top">
-          <div class="offer-badge" style="background:var(--dark);color:white;">⭐ Recommandé</div>
+        <div class="offer-head">
+          <div class="offer-badge">⭐ Recommandé</div>
           <div class="offer-name">Premium</div>
-          <div class="offer-price-row">
-            <span class="offer-price">60€</span>
-            <span class="offer-per">/mois</span>
-            <span class="offer-old">70€</span>
-          </div>
+          <div class="offer-price-row"><span class="offer-price">79€</span><span class="offer-per">/mois</span><span class="offer-old">89€</span></div>
           <p class="offer-desc">Un site géré de A à Z, qui évolue avec vous.</p>
         </div>
         <div class="offer-sep"></div>
@@ -357,419 +254,270 @@ select{
         </div>
       </label>
     </div>
-
-    <div class="selected-banner" id="selected-banner">
-      <span>✓</span>
-      <span id="selected-text"></span>
-    </div>
-
+    <div class="selected-banner" id="sel-banner"><span>✓</span><span id="sel-text"></span></div>
     <div class="nav-row">
-      <button type="button" class="btn btn-next" onclick="nextPage()" id="btn-next-0">Continuer →</button>
+      <button type="button" class="btn btn-next" onclick="nextPage()">Continuer →</button>
     </div>
   </div>
 
-  <!-- ════ PAGE 1 — RESTAURANT ════ -->
+  <!-- PAGE 1 — RESTAURANT -->
   <div class="page" id="page-1">
-    <div class="page-title">Votre restaurant</div>
-    <div class="page-desc">Informations qui apparaîtront sur votre site.</div>
-
+    <div class="pg-title">Votre restaurant</div>
+    <div class="pg-desc">Les informations de base qui apparaîtront sur votre site.</div>
     <div class="card">
       <div class="card-title">Identité</div>
-      <div class="field">
-        <label>Nom du restaurant <span class="req">*</span></label>
-        <input type="text" name="nom_restaurant" placeholder="Ex : Le Bistrot Parisien" id="f-nom" />
+      <div class="field"><label>Nom du restaurant <span class="req">*</span></label><input type="text" name="nom_restaurant" placeholder="Ex : Le Bistrot Parisien" id="f-nom"/></div>
+      <div class="row">
+        <div class="field"><label>Prénom du gérant <span class="req">*</span></label><input type="text" name="prenom_gerant" placeholder="Jean" id="f-prenom"/></div>
+        <div class="field"><label>Nom du gérant <span class="req">*</span></label><input type="text" name="nom_gerant" placeholder="Dupont"/></div>
       </div>
       <div class="row">
-        <div class="field">
-          <label>Prénom du gérant <span class="req">*</span></label>
-          <input type="text" name="prenom_gerant" placeholder="Jean" id="f-prenom" />
-        </div>
-        <div class="field">
-          <label>Nom du gérant <span class="req">*</span></label>
-          <input type="text" name="nom_gerant" placeholder="Dupont" />
-        </div>
+        <div class="field"><label>Téléphone <span class="req">*</span></label><input type="tel" name="telephone" placeholder="06 12 34 56 78"/></div>
+        <div class="field"><label>Email <span class="req">*</span></label><input type="email" name="email" placeholder="jean@restaurant.fr" id="f-email"/></div>
       </div>
-      <div class="row">
-        <div class="field">
-          <label>Téléphone <span class="req">*</span></label>
-          <input type="tel" name="telephone" placeholder="06 12 34 56 78" />
-        </div>
-        <div class="field">
-          <label>Email <span class="req">*</span></label>
-          <input type="email" name="email" placeholder="jean@restaurant.fr" id="f-email" />
-        </div>
-      </div>
-      <div class="field">
-        <label>Adresse complète <span class="req">*</span></label>
-        <input type="text" name="adresse" placeholder="12 rue de la Paix, 75001 Paris" />
-      </div>
+      <div class="field"><label>Adresse complète <span class="req">*</span></label><input type="text" name="adresse" placeholder="12 rue de la Paix, 75001 Paris"/></div>
     </div>
-
     <div class="card">
       <div class="card-title">Détails</div>
       <div class="row">
-        <div class="field">
-          <label>Type de cuisine</label>
+        <div class="field"><label>Type de cuisine</label>
           <select name="type_cuisine">
             <option value="">Sélectionner...</option>
-            <option>Française traditionnelle</option>
-            <option>Italienne</option>
-            <option>Japonaise / Sushis</option>
-            <option>Méditerranéenne</option>
-            <option>Burger / Fast-casual</option>
-            <option>Pizzeria</option>
-            <option>Végétarienne / Vegan</option>
-            <option>Fruits de mer</option>
-            <option>Libanaise</option>
-            <option>Autre</option>
+            <option>Française traditionnelle</option><option>Italienne</option>
+            <option>Japonaise / Sushis</option><option>Méditerranéenne</option>
+            <option>Burger / Fast-casual</option><option>Pizzeria</option>
+            <option>Végétarienne / Vegan</option><option>Fruits de mer</option>
+            <option>Libanaise</option><option>Autre</option>
           </select>
         </div>
-        <div class="field">
-          <label>Nombre de couverts</label>
-          <input type="number" name="couverts" placeholder="Ex : 40" min="1" />
-        </div>
+        <div class="field"><label>Nombre de couverts</label><input type="number" name="couverts" placeholder="Ex : 40" min="1"/></div>
       </div>
-      <div class="field">
-        <label>Description du restaurant</label>
-        <textarea name="description" placeholder="Ex : Restaurant familial depuis 1998, spécialisé dans les grillades au feu de bois..."></textarea>
-        <div class="hint">2-3 phrases qui apparaîtront sur votre site.</div>
-      </div>
+      <div class="field"><label>Description du restaurant</label><textarea name="description" placeholder="Ex : Restaurant familial depuis 1998, spécialisé dans les grillades au feu de bois..."></textarea><div class="hint">2-3 phrases qui apparaîtront sur votre site.</div></div>
     </div>
-
     <div class="nav-row">
       <button type="button" class="btn btn-prev" onclick="prevPage()">← Retour</button>
       <button type="button" class="btn btn-next" onclick="nextPage()">Continuer →</button>
     </div>
   </div>
 
-  <!-- ════ PAGE 2 — HORAIRES ════ -->
+  <!-- PAGE 2 — HORAIRES -->
   <div class="page" id="page-2">
-    <div class="page-title">Horaires & contact</div>
-    <div class="page-desc">Ces informations apparaîtront sur votre site.</div>
-
+    <div class="pg-title">Horaires & contact</div>
+    <div class="pg-desc">Ces informations apparaîtront sur votre site.</div>
     <div class="card">
       <div class="card-title">Horaires par jour</div>
-      <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px;">Cochez les jours d'ouverture et renseignez les créneaux.</p>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px">Cochez les jours d'ouverture et renseignez les créneaux.</p>
       <div id="schedule-builder"></div>
-      <div class="hint" style="margin-top:12px;">💡 Les jours non cochés seront marqués "Fermé" sur votre site.</div>
+      <div class="hint" style="margin-top:12px">💡 Les jours non cochés seront marqués "Fermé" sur votre site.</div>
     </div>
-
     <div class="card">
       <div class="card-title">Réservation</div>
       <div class="row">
-        <div class="field">
-          <label>Numéro de réservation</label>
-          <input type="tel" name="tel_reservation" placeholder="01 23 45 67 89" />
-        </div>
-        <div class="field">
-          <label>Lien réservation en ligne</label>
-          <input type="url" name="lien_reservation" placeholder="https://lafourchette.com/..." />
-        </div>
+        <div class="field"><label>Numéro de réservation</label><input type="tel" name="tel_reservation" placeholder="01 23 45 67 89"/></div>
+        <div class="field"><label>Lien réservation en ligne</label><input type="url" name="lien_reservation" placeholder="https://lafourchette.com/..."/></div>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">Réseaux sociaux</div>
       <div class="row">
-        <div class="field">
-          <label>Page Facebook</label>
-          <input type="url" name="facebook" placeholder="https://facebook.com/..." />
-        </div>
-        <div class="field">
-          <label>Compte Instagram</label>
-          <input type="url" name="instagram" placeholder="https://instagram.com/..." />
-        </div>
+        <div class="field"><label>Page Facebook</label><input type="url" name="facebook" placeholder="https://facebook.com/..."/></div>
+        <div class="field"><label>Compte Instagram</label><input type="url" name="instagram" placeholder="https://instagram.com/..."/></div>
       </div>
     </div>
-
     <div class="nav-row">
       <button type="button" class="btn btn-prev" onclick="prevPage()">← Retour</button>
       <button type="button" class="btn btn-next" onclick="nextPage()">Continuer →</button>
     </div>
   </div>
 
-  <!-- ════ PAGE 3 — VISUELS ════ -->
+  <!-- PAGE 3 — VISUELS -->
   <div class="page" id="page-3">
-    <div class="page-title">Identité visuelle</div>
-    <div class="page-desc">Photos et ambiance de votre site.</div>
-
+    <div class="pg-title">Identité visuelle</div>
+    <div class="pg-desc">Photos et ambiance de votre site.</div>
     <div class="card">
       <div class="card-title">Envoi de vos fichiers</div>
-      <div class="info-box">
-        📁 Pour nous envoyer vos fichiers (logo, photos, menu), utilisez <strong>WeTransfer</strong> — gratuit, simple, sans inscription.<br><br>
-        <strong>Comment faire :</strong><br>
-        1. Allez sur <strong>wetransfer.com</strong><br>
-        2. Ajoutez tous vos fichiers<br>
-        3. Email de destination : <strong>contact@webdesign28.fr</strong><br>
-        4. Cliquez Envoyer ✓
-      </div>
-      <div class="neutral-box">
-        📌 Fichiers à envoyer :
-        <ul>
-          <li>Logo (PNG fond transparent, SVG ou AI de préférence)</li>
-          <li>Photos salle, terrasse, façade (min. 3, JPG haute qualité)</li>
-          <li>Photos de plats</li>
-          <li>Menu / carte (PDF ou Word)</li>
-        </ul>
-      </div>
+      <div class="info-blue">📁 Utilisez <strong>WeTransfer</strong> (gratuit) pour nous envoyer vos fichiers.<br><br><strong>Comment faire :</strong><br>1. Allez sur <strong>wetransfer.com</strong><br>2. Ajoutez vos fichiers<br>3. Email de destination : <strong>contact@webdesign28.fr</strong><br>4. Envoyez ✓</div>
+      <div class="info-gray">📌 Fichiers à envoyer :<ul><li>Logo (PNG fond transparent, SVG ou AI)</li><li>Photos salle, terrasse, façade (min. 3, JPG haute qualité)</li><li>Photos de plats</li><li>Menu / carte (PDF ou Word)</li></ul></div>
     </div>
-
     <div class="card">
       <div class="card-title">Couleurs du site</div>
-      <p style="font-size:.82rem;color:var(--muted);margin-bottom:20px;">Choisissez jusqu'à deux couleurs. La secondaire est optionnelle.</p>
-
-      <div style="margin-bottom:24px;">
-        <div style="font-size:.82rem;font-weight:600;margin-bottom:12px;">Couleur principale</div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:20px">Choisissez jusqu'à 2 couleurs. La secondaire est optionnelle.</p>
+      <div style="margin-bottom:24px">
+        <div style="font-size:.82rem;font-weight:600;margin-bottom:10px">Couleur principale</div>
         <div class="color-row">
-          <div class="swatch swatch1 selected" style="background:#FF4D1C" onclick="selectColor1(this,'#FF4D1C')"></div>
-          <div class="swatch swatch1" style="background:#2B6CB0" onclick="selectColor1(this,'#2B6CB0')"></div>
-          <div class="swatch swatch1" style="background:#2F855A" onclick="selectColor1(this,'#2F855A')"></div>
-          <div class="swatch swatch1" style="background:#C05621" onclick="selectColor1(this,'#C05621')"></div>
-          <div class="swatch swatch1" style="background:#744210" onclick="selectColor1(this,'#744210')"></div>
-          <div class="swatch swatch1" style="background:#1A202C" onclick="selectColor1(this,'#1A202C')"></div>
-          <div class="swatch swatch1" style="background:#805AD5" onclick="selectColor1(this,'#805AD5')"></div>
-          <div class="swatch swatch1" style="background:#D69E2E" onclick="selectColor1(this,'#D69E2E')"></div>
-          <div class="swatch swatch1" style="background:#E91E8C" onclick="selectColor1(this,'#E91E8C')"></div>
-          <input type="color" id="custom-color1" value="#FF4D1C" oninput="selectCustomColor1(this)" style="width:32px;height:32px;border-radius:50%;border:2px solid var(--border);cursor:pointer;padding:2px;" title="Couleur personnalisée" />
+          <div class="swatch swatch1 selected" style="background:#FF4D1C" onclick="sc1(this,'#FF4D1C')"></div>
+          <div class="swatch swatch1" style="background:#2B6CB0" onclick="sc1(this,'#2B6CB0')"></div>
+          <div class="swatch swatch1" style="background:#2F855A" onclick="sc1(this,'#2F855A')"></div>
+          <div class="swatch swatch1" style="background:#C05621" onclick="sc1(this,'#C05621')"></div>
+          <div class="swatch swatch1" style="background:#744210" onclick="sc1(this,'#744210')"></div>
+          <div class="swatch swatch1" style="background:#1A202C" onclick="sc1(this,'#1A202C')"></div>
+          <div class="swatch swatch1" style="background:#805AD5" onclick="sc1(this,'#805AD5')"></div>
+          <div class="swatch swatch1" style="background:#D69E2E" onclick="sc1(this,'#D69E2E')"></div>
+          <div class="swatch swatch1" style="background:#E91E8C" onclick="sc1(this,'#E91E8C')"></div>
+          <input type="color" value="#FF4D1C" oninput="scc1(this)" style="width:30px;height:30px;border-radius:50%;border:2px solid var(--border);cursor:pointer;padding:2px"/>
         </div>
-        <div id="color-preview1" style="margin-top:10px;height:36px;border-radius:8px;background:#FF4D1C;display:flex;align-items:center;justify-content:center;transition:background .2s;">
-          <span id="color-hex1" style="font-size:.8rem;font-weight:600;color:white;font-family:monospace;">#FF4D1C</span>
-        </div>
-        <input type="hidden" name="couleur_principale" id="couleur-val1" value="#FF4D1C" />
+        <div class="preview-bar" id="prev1" style="background:#FF4D1C"><span id="hex1" style="color:white">FF4D1C</span></div>
+        <input type="hidden" name="couleur_principale" id="cv1" value="#FF4D1C"/>
       </div>
-
-      <div style="height:1px;background:var(--border);margin-bottom:20px;"></div>
-
+      <div style="height:1px;background:var(--border);margin-bottom:20px"></div>
       <div>
-        <div style="font-size:.82rem;font-weight:600;margin-bottom:12px;">Couleur secondaire <span style="font-weight:300;color:var(--muted);font-size:.78rem;">(optionnelle)</span></div>
+        <div style="font-size:.82rem;font-weight:600;margin-bottom:10px">Couleur secondaire <span style="font-weight:400;color:var(--light)">(optionnelle)</span></div>
         <div class="color-row">
-          <div class="swatch swatch2" style="background:#FF4D1C" onclick="selectColor2(this,'#FF4D1C')"></div>
-          <div class="swatch swatch2" style="background:#2B6CB0" onclick="selectColor2(this,'#2B6CB0')"></div>
-          <div class="swatch swatch2" style="background:#2F855A" onclick="selectColor2(this,'#2F855A')"></div>
-          <div class="swatch swatch2" style="background:#C05621" onclick="selectColor2(this,'#C05621')"></div>
-          <div class="swatch swatch2" style="background:#744210" onclick="selectColor2(this,'#744210')"></div>
-          <div class="swatch swatch2" style="background:#1A202C" onclick="selectColor2(this,'#1A202C')"></div>
-          <div class="swatch swatch2" style="background:#805AD5" onclick="selectColor2(this,'#805AD5')"></div>
-          <div class="swatch swatch2" style="background:#D69E2E" onclick="selectColor2(this,'#D69E2E')"></div>
-          <div class="swatch swatch2" style="background:#E91E8C" onclick="selectColor2(this,'#E91E8C')"></div>
-          <input type="color" id="custom-color2" value="#2B6CB0" oninput="selectCustomColor2(this)" style="width:32px;height:32px;border-radius:50%;border:2px solid var(--border);cursor:pointer;padding:2px;" title="Couleur personnalisée" />
+          <div class="swatch swatch2" style="background:#FF4D1C" onclick="sc2(this,'#FF4D1C')"></div>
+          <div class="swatch swatch2" style="background:#2B6CB0" onclick="sc2(this,'#2B6CB0')"></div>
+          <div class="swatch swatch2" style="background:#2F855A" onclick="sc2(this,'#2F855A')"></div>
+          <div class="swatch swatch2" style="background:#C05621" onclick="sc2(this,'#C05621')"></div>
+          <div class="swatch swatch2" style="background:#744210" onclick="sc2(this,'#744210')"></div>
+          <div class="swatch swatch2" style="background:#1A202C" onclick="sc2(this,'#1A202C')"></div>
+          <div class="swatch swatch2" style="background:#805AD5" onclick="sc2(this,'#805AD5')"></div>
+          <div class="swatch swatch2" style="background:#D69E2E" onclick="sc2(this,'#D69E2E')"></div>
+          <div class="swatch swatch2" style="background:#E91E8C" onclick="sc2(this,'#E91E8C')"></div>
+          <input type="color" value="#2B6CB0" oninput="scc2(this)" style="width:30px;height:30px;border-radius:50%;border:2px solid var(--border);cursor:pointer;padding:2px"/>
         </div>
-        <div id="color-preview2" style="margin-top:10px;height:36px;border-radius:8px;background:var(--border);display:flex;align-items:center;justify-content:center;transition:background .2s;">
-          <span id="color-hex2" style="font-size:.8rem;font-weight:500;color:var(--muted);font-family:monospace;">Non définie</span>
-        </div>
-        <input type="hidden" name="couleur_secondaire" id="couleur-val2" value="" />
+        <div class="preview-bar" id="prev2" style="background:var(--border)"><span id="hex2" style="color:var(--muted)">Non définie</span></div>
+        <input type="hidden" name="couleur_secondaire" id="cv2" value=""/>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">Ambiance souhaitée</div>
       <div class="pills">
-        <label class="pill"><input type="radio" name="ambiance" value="Élégant & raffiné" />Élégant & raffiné</label>
-        <label class="pill"><input type="radio" name="ambiance" value="Chaleureux & traditionnel" />Chaleureux & traditionnel</label>
-        <label class="pill"><input type="radio" name="ambiance" value="Moderne & épuré" />Moderne & épuré</label>
-        <label class="pill"><input type="radio" name="ambiance" value="Décontracté & convivial" />Décontracté & convivial</label>
-        <label class="pill"><input type="radio" name="ambiance" value="Exotique & dépaysant" />Exotique & dépaysant</label>
-        <label class="pill"><input type="radio" name="ambiance" value="Autre" onclick="document.getElementById('ambiance-custom').style.display='block'" />Autre</label>
+        <label class="pill"><input type="radio" name="ambiance" value="Élégant & raffiné"/>Élégant & raffiné</label>
+        <label class="pill"><input type="radio" name="ambiance" value="Chaleureux & traditionnel"/>Chaleureux & traditionnel</label>
+        <label class="pill"><input type="radio" name="ambiance" value="Moderne & épuré"/>Moderne & épuré</label>
+        <label class="pill"><input type="radio" name="ambiance" value="Décontracté & convivial"/>Décontracté & convivial</label>
+        <label class="pill"><input type="radio" name="ambiance" value="Exotique & dépaysant"/>Exotique & dépaysant</label>
+        <label class="pill"><input type="radio" name="ambiance" value="Autre" onclick="document.getElementById('amb-custom').style.display='block'"/>Autre</label>
       </div>
-      <div class="field" id="ambiance-custom" style="display:none;margin-top:14px;">
-        <label>Décrivez l'ambiance souhaitée</label>
-        <textarea name="ambiance_personnalisee" placeholder="Style industriel, lumières tamisées..."></textarea>
-      </div>
-      <div class="field" style="margin-top:16px;">
-        <label>Site de référence (facultatif)</label>
-        <input type="url" name="site_reference" placeholder="https://exemple.com" />
-        <div class="hint">Un site que vous aimez visuellement.</div>
-      </div>
+      <div class="field" id="amb-custom" style="display:none;margin-top:14px"><label>Décrivez l'ambiance</label><textarea name="ambiance_personnalisee" placeholder="Style industriel, lumières tamisées..."></textarea></div>
+      <div class="field" style="margin-top:16px"><label>Site de référence (facultatif)</label><input type="url" name="site_reference" placeholder="https://exemple.com"/><div class="hint">Un site que vous aimez visuellement.</div></div>
     </div>
-
     <div class="nav-row">
       <button type="button" class="btn btn-prev" onclick="prevPage()">← Retour</button>
       <button type="button" class="btn btn-next" onclick="nextPage()">Continuer →</button>
     </div>
   </div>
 
-  <!-- ════ PAGE 4 — MENU ════ -->
+  <!-- PAGE 4 — MENU -->
   <div class="page" id="page-4">
-    <div class="page-title">Menu & contenu</div>
-    <div class="page-desc">Ce qui sera mis en avant sur votre site.</div>
-
+    <div class="pg-title">Menu & contenu</div>
+    <div class="pg-desc">Ce qui sera mis en avant sur votre site.</div>
     <div class="card">
       <div class="card-title">Carte / Menu</div>
-      <div class="info-box" style="font-size:.8rem;">📎 Pensez à inclure votre menu dans votre envoi WeTransfer (étape Visuels).</div>
-      <div class="field">
-        <label>Prix moyen par personne</label>
+      <div class="info-blue" style="font-size:.8rem">📎 Pensez à inclure votre menu dans votre envoi WeTransfer (étape Visuels).</div>
+      <div class="field"><label>Prix moyen par personne</label>
         <div class="pills">
-          <label class="pill"><input type="radio" name="prix_moyen" value="Moins de 15€" />– de 15€</label>
-          <label class="pill"><input type="radio" name="prix_moyen" value="15€ – 30€" />15€ – 30€</label>
-          <label class="pill"><input type="radio" name="prix_moyen" value="30€ – 60€" />30€ – 60€</label>
-          <label class="pill"><input type="radio" name="prix_moyen" value="Plus de 60€" />+ de 60€</label>
+          <label class="pill"><input type="radio" name="prix_moyen" value="Moins de 15€"/>– de 15€</label>
+          <label class="pill"><input type="radio" name="prix_moyen" value="15€ – 30€"/>15€ – 30€</label>
+          <label class="pill"><input type="radio" name="prix_moyen" value="30€ – 79€"/>30€ – 79€</label>
+          <label class="pill"><input type="radio" name="prix_moyen" value="Plus de 79€"/>+ de 79€</label>
         </div>
       </div>
-      <div class="field">
-        <label>Formules / offres spéciales</label>
-        <textarea name="formules" placeholder="Ex : Menu déjeuner à 14€90, Happy Hour le jeudi soir..."></textarea>
-      </div>
+      <div class="field"><label>Formules / offres spéciales</label><textarea name="formules" placeholder="Ex : Menu déjeuner à 14€90, Happy Hour le jeudi soir..."></textarea></div>
     </div>
-
     <div class="card">
       <div class="card-title">Services proposés</div>
       <div class="pills">
-        <label class="pill"><input type="checkbox" name="services" value="Livraison" />Livraison</label>
-        <label class="pill"><input type="checkbox" name="services" value="Click & Collect" />Click & Collect</label>
-        <label class="pill"><input type="checkbox" name="services" value="Privatisation" />Privatisation</label>
-        <label class="pill"><input type="checkbox" name="services" value="Repas d'affaires" />Repas d'affaires</label>
-        <label class="pill"><input type="checkbox" name="services" value="Terrasse" />Terrasse</label>
-        <label class="pill"><input type="checkbox" name="services" value="Parking" />Parking</label>
-        <label class="pill"><input type="checkbox" name="services" value="Accès PMR" />Accès PMR</label>
-        <label class="pill"><input type="checkbox" name="services" value="Paiement sans contact" />Paiement sans contact</label>
+        <label class="pill"><input type="checkbox" name="services" value="Livraison"/>Livraison</label>
+        <label class="pill"><input type="checkbox" name="services" value="Click & Collect"/>Click & Collect</label>
+        <label class="pill"><input type="checkbox" name="services" value="Privatisation"/>Privatisation</label>
+        <label class="pill"><input type="checkbox" name="services" value="Repas d'affaires"/>Repas d'affaires</label>
+        <label class="pill"><input type="checkbox" name="services" value="Terrasse"/>Terrasse</label>
+        <label class="pill"><input type="checkbox" name="services" value="Parking"/>Parking</label>
+        <label class="pill"><input type="checkbox" name="services" value="Accès PMR"/>Accès PMR</label>
+        <label class="pill"><input type="checkbox" name="services" value="Paiement sans contact"/>Sans contact</label>
       </div>
     </div>
-
     <div class="nav-row">
       <button type="button" class="btn btn-prev" onclick="prevPage()">← Retour</button>
       <button type="button" class="btn btn-next" onclick="nextPage()">Continuer →</button>
     </div>
   </div>
 
-  <!-- ════ PAGE 5 — TECHNIQUE ════ -->
+  <!-- PAGE 5 — TECHNIQUE -->
   <div class="page" id="page-5">
-    <div class="page-title">Domaine & technique</div>
-    <div class="page-desc">Informations pour la mise en ligne.</div>
-
+    <div class="pg-title">Domaine & technique</div>
+    <div class="pg-desc">Informations pour la mise en ligne.</div>
     <div class="card">
       <div class="card-title">Nom de domaine</div>
-      <div class="field">
-        <label>Domaine souhaité</label>
-        <input type="text" name="domaine_souhaite" placeholder="Ex : lebistrotparisien.fr" />
-      </div>
-      <div class="field">
-        <label>Vous avez déjà un domaine ?</label>
+      <div class="field"><label>Domaine souhaité</label><input type="text" name="domaine_souhaite" placeholder="Ex : lebistrotparisien.fr"/></div>
+      <div class="field"><label>Vous avez déjà un domaine ?</label>
         <div class="pills">
-          <label class="pill"><input type="radio" name="domaine_existant" value="Non, à créer" onclick="document.getElementById('domain-existing').style.display='none'" />Non, à créer</label>
-          <label class="pill"><input type="radio" name="domaine_existant" value="Oui, à transférer" onclick="document.getElementById('domain-existing').style.display='block'" />Oui, à transférer</label>
+          <label class="pill"><input type="radio" name="domaine_existant" value="Non, à créer" onclick="document.getElementById('dom-ex').style.display='none'"/>Non, à créer</label>
+          <label class="pill"><input type="radio" name="domaine_existant" value="Oui, à transférer" onclick="document.getElementById('dom-ex').style.display='block'"/>Oui, à transférer</label>
         </div>
       </div>
-      <div class="field" id="domain-existing" style="display:none;">
-        <label>Registrar actuel</label>
-        <input type="text" name="registrar" placeholder="Ex : OVH, Gandi..." />
-      </div>
+      <div class="field" id="dom-ex" style="display:none"><label>Registrar actuel</label><input type="text" name="registrar" placeholder="Ex : OVH, Gandi..."/></div>
     </div>
-
     <div class="card">
       <div class="card-title">Site actuel</div>
-      <div class="field">
-        <label>Un site web existe déjà ?</label>
+      <div class="field"><label>Un site web existe déjà ?</label>
         <div class="pills">
-          <label class="pill"><input type="radio" name="site_existant" value="Non" />Non</label>
-          <label class="pill"><input type="radio" name="site_existant" value="Oui, à remplacer" />Oui, à remplacer</label>
-          <label class="pill"><input type="radio" name="site_existant" value="Oui, à conserver" />Oui, à conserver</label>
+          <label class="pill"><input type="radio" name="site_existant" value="Non"/>Non</label>
+          <label class="pill"><input type="radio" name="site_existant" value="Oui, à remplacer"/>Oui, à remplacer</label>
+          <label class="pill"><input type="radio" name="site_existant" value="Oui, à conserver"/>Oui, à conserver</label>
         </div>
       </div>
-      <div class="field">
-        <label>Langue(s) du site</label>
+      <div class="field"><label>Langue(s) du site</label>
         <div class="pills">
-          <label class="pill"><input type="checkbox" name="langues" value="Français" checked />🇫🇷 Français</label>
-          <label class="pill"><input type="checkbox" name="langues" value="Anglais" />🇬🇧 Anglais</label>
-          <label class="pill"><input type="checkbox" name="langues" value="Espagnol" />🇪🇸 Espagnol</label>
-          <label class="pill"><input type="checkbox" name="langues" value="Italien" />🇮🇹 Italien</label>
-          <label class="pill"><input type="checkbox" name="langues" value="Arabe" />🇸🇦 Arabe</label>
+          <label class="pill"><input type="checkbox" name="langues" value="Français" checked/>🇫🇷 Français</label>
+          <label class="pill"><input type="checkbox" name="langues" value="Anglais"/>🇬🇧 Anglais</label>
+          <label class="pill"><input type="checkbox" name="langues" value="Espagnol"/>🇪🇸 Espagnol</label>
+          <label class="pill"><input type="checkbox" name="langues" value="Arabe"/>🇸🇦 Arabe</label>
         </div>
       </div>
     </div>
-
     <div class="nav-row">
       <button type="button" class="btn btn-prev" onclick="prevPage()">← Retour</button>
       <button type="button" class="btn btn-next" onclick="nextPage()">Continuer →</button>
     </div>
   </div>
 
-  <!-- ════ PAGE 6 — LÉGAL ════ -->
+  <!-- PAGE 6 — LÉGAL -->
   <div class="page" id="page-6">
-    <div class="page-title">Mentions légales</div>
-    <div class="page-desc">Informations obligatoires pour votre site.</div>
-
+    <div class="pg-title">Mentions légales</div>
+    <div class="pg-desc">Informations obligatoires pour votre site.</div>
     <div class="card">
       <div class="card-title">Société</div>
       <div class="row">
-        <div class="field">
-          <label>Raison sociale / SIRET</label>
-          <input type="text" name="siret" placeholder="SARL Le Bistrot — 123 456 789 00012" />
-        </div>
-        <div class="field">
-          <label>Forme juridique</label>
+        <div class="field"><label>Raison sociale / SIRET</label><input type="text" name="siret" placeholder="SARL Le Bistrot — 123 456 789 00012"/></div>
+        <div class="field"><label>Forme juridique</label>
           <select name="forme_juridique">
             <option value="">Sélectionner...</option>
-            <option>Auto-entrepreneur</option>
-            <option>SARL</option>
-            <option>SAS / SASU</option>
-            <option>EURL</option>
-            <option>SA</option>
-            <option>Autre</option>
+            <option>Auto-entrepreneur</option><option>SARL</option>
+            <option>SAS / SASU</option><option>EURL</option><option>SA</option><option>Autre</option>
           </select>
         </div>
       </div>
-      <div class="field">
-        <label>Adresse du siège (si différente)</label>
-        <input type="text" name="siege_social" placeholder="Identique à l'adresse restaurant" />
-      </div>
+      <div class="field"><label>Adresse du siège (si différente)</label><input type="text" name="siege_social" placeholder="Identique à l'adresse restaurant"/></div>
     </div>
-
     <div class="card">
       <div class="card-title">Informations complémentaires</div>
       <div class="row">
-        <div class="field">
-          <label>Capital social</label>
-          <input type="text" name="capital_social" placeholder="Ex : 1 000 €" />
-          <div class="hint">Non requis pour les auto-entrepreneurs.</div>
-        </div>
-        <div class="field">
-          <label>Numéro RCS</label>
-          <input type="text" name="rcs" placeholder="RCS Paris B 123 456 789" />
-        </div>
+        <div class="field"><label>Capital social</label><input type="text" name="capital_social" placeholder="Ex : 1 000 €"/><div class="hint">Non requis pour les auto-entrepreneurs.</div></div>
+        <div class="field"><label>Numéro RCS</label><input type="text" name="rcs" placeholder="RCS Paris B 123 456 789"/></div>
       </div>
-      <div class="field">
-        <label>N° TVA intracommunautaire</label>
-        <input type="text" name="tva_intra" placeholder="FR12 345678901 — ou « non assujetti »" />
-        <div class="hint">En micro-entreprise sous le seuil, indiquez « non assujetti ».</div>
-      </div>
-      <div class="field">
-        <label>Directeur de la publication</label>
-        <input type="text" name="directeur_publication" placeholder="Nom Prénom du responsable légal" />
-      </div>
+      <div class="field"><label>N° TVA intracommunautaire</label><input type="text" name="tva_intra" placeholder="FR12 345678901 — ou « non assujetti »"/><div class="hint">En micro-entreprise sous le seuil, indiquez « non assujetti ».</div></div>
+      <div class="field"><label>Directeur de la publication</label><input type="text" name="directeur_publication" placeholder="Nom Prénom du responsable légal"/></div>
     </div>
-
     <div class="nav-row">
       <button type="button" class="btn btn-prev" onclick="prevPage()">← Retour</button>
       <button type="button" class="btn btn-next" onclick="nextPage()">Continuer →</button>
     </div>
   </div>
 
-  <!-- ════ PAGE 7 — FINALISATION ════ -->
+  <!-- PAGE 7 — FINALISATION -->
   <div class="page" id="page-7">
-    <div class="page-title">Derniers détails</div>
-    <div class="page-desc">On est presque au bout ! Merci pour tout.</div>
-
-    <!-- Récap offre -->
-    <div id="recap-offre" style="display:none;background:var(--dark);color:white;border-radius:12px;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-      <div>
-        <div style="font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;opacity:.5;margin-bottom:4px;">Votre offre choisie</div>
-        <div id="recap-offre-text" style="font-family:var(--font-display);font-size:1.2rem;font-weight:800;"></div>
-      </div>
-      <button type="button" onclick="goTo(0)" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);padding:8px 16px;border-radius:8px;font-size:.8rem;cursor:pointer;font-family:var(--font-body);">Modifier</button>
+    <div class="pg-title">Derniers détails</div>
+    <div class="pg-desc">On est presque au bout !</div>
+    <div id="recap" style="display:none" class="recap-bar">
+      <div><div class="recap-label">Votre offre</div><div class="recap-value" id="recap-val"></div></div>
+      <button type="button" onclick="goTo(0)" class="recap-change">Modifier</button>
     </div>
-
     <div class="card">
       <div class="card-title">À propos de votre restaurant</div>
-      <div class="field">
-        <label>Histoire du restaurant (facultatif)</label>
-        <textarea name="histoire" style="min-height:110px;" placeholder="Ex : Fondé en 2005 par deux frères passionnés..."></textarea>
-      </div>
-      <div class="field">
-        <label>Demandes particulières</label>
-        <textarea name="remarques" placeholder="Délai souhaité, contraintes particulières, logo à venir..."></textarea>
-      </div>
+      <div class="field"><label>Histoire du restaurant (facultatif)</label><textarea name="histoire" style="min-height:110px" placeholder="Ex : Fondé en 2005 par deux frères passionnés..."></textarea></div>
+      <div class="field"><label>Demandes particulières</label><textarea name="remarques" placeholder="Délai souhaité, logo à venir, contraintes particulières..."></textarea></div>
     </div>
-
     <div class="nav-row">
       <button type="button" class="btn btn-prev" onclick="prevPage()">← Retour</button>
       <button type="submit" class="btn btn-submit">Envoyer le formulaire ✓</button>
@@ -781,150 +529,90 @@ select{
 
 <script>
 // Splash
-setTimeout(() => {
-  const s = document.getElementById('splash');
-  s.classList.add('hide');
-  setTimeout(() => s.style.display='none', 600);
-}, 1800);
+setTimeout(() => { const s=document.getElementById('splash'); s.classList.add('out'); setTimeout(()=>s.style.display='none',500); }, 1600);
 
-// Pages
-let current = 0;
-const total = 8;
-const tabs = document.querySelectorAll('.step-tab');
-
-function goTo(n) {
-  document.getElementById('page-'+current).classList.remove('active');
-  tabs[current].classList.remove('active');
-  if(n > current) tabs[current].classList.add('done');
-  current = n;
-  document.getElementById('page-'+current).classList.add('active');
-  tabs.forEach((t,i) => { t.classList.remove('active'); if(i===current) t.classList.add('active'); });
+// Nav
+let cur=0; const total=8;
+const tabs=document.querySelectorAll('.tab');
+function goTo(n){
+  document.getElementById('page-'+cur).classList.remove('active');
+  tabs[cur].classList.remove('active');
+  if(n>cur) tabs[cur].classList.add('done');
+  cur=n;
+  document.getElementById('page-'+cur).classList.add('active');
+  tabs.forEach((t,i)=>{t.classList.remove('active');if(i===cur)t.classList.add('active')});
   window.scrollTo({top:0,behavior:'smooth'});
-  updateRecap();
+  if(cur===7&&selOffer){document.getElementById('recap').style.display='flex';document.getElementById('recap-val').textContent=selOffer==='basique'?'Basique — 59€/mois':'Premium — 79€/mois';}
 }
-function nextPage() { if(current < total-1) goTo(current+1); }
-function prevPage() { if(current > 0) goTo(current-1); }
+function nextPage(){if(cur<total-1)goTo(cur+1)}
+function prevPage(){if(cur>0)goTo(cur-1)}
 
-// Offer selection
-let selectedOffer = '';
-function selectOffer(name, el) {
-  selectedOffer = name;
-  document.querySelectorAll('.offer-card').forEach(c => c.classList.remove('selected'));
+// Offer
+let selOffer='';
+function selectOffer(name,el){
+  selOffer=name;
+  document.querySelectorAll('.offer-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
-  el.querySelector('input[type=radio]').checked = true;
-  document.getElementById('offre-hidden').value = name;
-  const banner = document.getElementById('selected-banner');
-  const text = document.getElementById('selected-text');
-  if(name === 'basique') {
-    text.textContent = 'Offre Basique sélectionnée — 45€/mois';
-  } else {
-    text.textContent = 'Offre Premium sélectionnée — 60€/mois';
-  }
-  banner.classList.add('show');
+  el.querySelector('input[type=radio]').checked=true;
+  document.getElementById('offre-hidden').value=name;
+  const b=document.getElementById('sel-banner');
+  document.getElementById('sel-text').textContent=name==='basique'?'Offre Basique sélectionnée — 59€/mois':'Offre Premium sélectionnée — 79€/mois';
+  b.classList.add('show');
 }
 
-function updateRecap() {
-  const el = document.getElementById('recap-offre');
-  const txt = document.getElementById('recap-offre-text');
-  if(selectedOffer && current === 7) {
-    el.style.display='flex';
-    txt.textContent = selectedOffer === 'basique' ? 'Offre Basique — 45€/mois' : 'Offre Premium — 60€/mois';
-  }
-}
-
-// Pre-select from URL param
-window.addEventListener('DOMContentLoaded', () => {
-  const p = new URLSearchParams(window.location.search).get('offre');
-  if(p === 'basique') { selectOffer('basique', document.getElementById('card-basic')); goTo(1); }
-  else if(p === 'premium') { selectOffer('premium', document.getElementById('card-premium')); goTo(1); }
+// URL param pre-select
+window.addEventListener('DOMContentLoaded',()=>{
+  const p=new URLSearchParams(window.location.search).get('offre');
+  if(p==='basique'){selectOffer('basique',document.getElementById('card-basic'));goTo(1);}
+  else if(p==='premium'){selectOffer('premium',document.getElementById('card-premium'));goTo(1);}
 });
 
-// Schedule builder
-const DAYS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
-const sb = document.getElementById('schedule-builder');
-// Header
-sb.innerHTML = `<div style="display:grid;grid-template-columns:110px 1fr;gap:12px;padding-bottom:8px;border-bottom:2px solid var(--border);margin-bottom:4px;">
-  <div></div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;">
-    <span>Midi ouv.</span><span>Midi ferm.</span><span>Soir ouv.</span><span>Soir ferm.</span>
-  </div>
-</div>`;
-DAYS.forEach((day,i) => {
-  sb.innerHTML += `<div class="sched-row">
-    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.875rem;font-weight:500;margin:0;">
-      <input type="checkbox" id="day_${i}" onchange="toggleDay(${i})" style="width:15px;height:15px;accent-color:var(--accent);" /> ${day}
+// Schedule
+const DAYS=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+const sb=document.getElementById('schedule-builder');
+sb.innerHTML=`<div class="sched-header"><div></div><div class="sched-header-labels"><span>Midi ouv.</span><span>Midi ferm.</span><span>Soir ouv.</span><span>Soir ferm.</span></div></div>`;
+DAYS.forEach((d,i)=>{
+  sb.innerHTML+=`<div class="sched-row">
+    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.875rem;font-weight:600;margin:0">
+      <input type="checkbox" id="d${i}" onchange="td(${i})" style="width:15px;height:15px;accent-color:var(--accent)"/> ${d}
     </label>
     <div>
-      <div id="hours_${i}" style="display:none;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;">
-        <input type="text" name="midi_debut_${day}" placeholder="12:00" style="font-size:.78rem;padding:7px 10px;" />
-        <input type="text" name="midi_fin_${day}" placeholder="14:30" style="font-size:.78rem;padding:7px 10px;" />
-        <input type="text" name="soir_debut_${day}" placeholder="19:00" style="font-size:.78rem;padding:7px 10px;" />
-        <input type="text" name="soir_fin_${day}" placeholder="22:30" style="font-size:.78rem;padding:7px 10px;" />
+      <div id="h${i}" class="sched-hours">
+        <input type="text" name="midi_debut_${d}" placeholder="12:00" style="font-size:.78rem;padding:7px 10px"/>
+        <input type="text" name="midi_fin_${d}" placeholder="14:30" style="font-size:.78rem;padding:7px 10px"/>
+        <input type="text" name="soir_debut_${d}" placeholder="19:00" style="font-size:.78rem;padding:7px 10px"/>
+        <input type="text" name="soir_fin_${d}" placeholder="22:30" style="font-size:.78rem;padding:7px 10px"/>
       </div>
-      <div id="closed_${i}" style="font-size:.82rem;color:var(--muted);">— Fermé</div>
+      <div id="c${i}" class="sched-closed">— Fermé</div>
     </div>
   </div>`;
 });
-function toggleDay(i) {
-  const c = document.getElementById('day_'+i).checked;
-  document.getElementById('hours_'+i).style.display = c ? 'grid' : 'none';
-  document.getElementById('closed_'+i).style.display = c ? 'none' : 'block';
-}
+function td(i){const c=document.getElementById('d'+i).checked;document.getElementById('h'+i).style.display=c?'grid':'none';document.getElementById('c'+i).style.display=c?'none':'block';}
 
 // Colors
-function selectColor1(el,hex) {
-  document.querySelectorAll('.swatch1').forEach(s=>s.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('couleur-val1').value=hex;
-  document.getElementById('custom-color1').value=hex;
-  updatePreview('color-preview1','color-hex1',hex);
-}
-function selectCustomColor1(inp) {
-  document.querySelectorAll('.swatch1').forEach(s=>s.classList.remove('selected'));
-  document.getElementById('couleur-val1').value=inp.value;
-  updatePreview('color-preview1','color-hex1',inp.value);
-}
-function selectColor2(el,hex) {
-  document.querySelectorAll('.swatch2').forEach(s=>s.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('couleur-val2').value=hex;
-  document.getElementById('custom-color2').value=hex;
-  updatePreview('color-preview2','color-hex2',hex);
-}
-function selectCustomColor2(inp) {
-  document.querySelectorAll('.swatch2').forEach(s=>s.classList.remove('selected'));
-  document.getElementById('couleur-val2').value=inp.value;
-  updatePreview('color-preview2','color-hex2',inp.value);
-}
-function updatePreview(pid,hid,hex) {
-  const p=document.getElementById(pid), l=document.getElementById(hid);
-  if(p) p.style.background=hex;
-  if(l) {
-    l.textContent=hex.toUpperCase();
+function upPrev(id,hid,hex){
+  const p=document.getElementById(id),l=document.getElementById(hid);
+  if(p)p.style.background=hex;
+  if(l){l.textContent=hex.toUpperCase().replace('#','');
     const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-    const lum=(0.299*r+0.587*g+0.114*b)/255;
-    l.style.color=lum>.55?'#1A1714':'white';
-  }
+    l.style.color=(0.299*r+0.587*g+0.114*b)/255>.55?'#111':'white';}
 }
+function sc1(el,h){document.querySelectorAll('.swatch1').forEach(s=>s.classList.remove('selected'));el.classList.add('selected');document.getElementById('cv1').value=h;upPrev('prev1','hex1',h);}
+function scc1(inp){document.querySelectorAll('.swatch1').forEach(s=>s.classList.remove('selected'));document.getElementById('cv1').value=inp.value;upPrev('prev1','hex1',inp.value);}
+function sc2(el,h){document.querySelectorAll('.swatch2').forEach(s=>s.classList.remove('selected'));el.classList.add('selected');document.getElementById('cv2').value=h;upPrev('prev2','hex2',h);}
+function scc2(inp){document.querySelectorAll('.swatch2').forEach(s=>s.classList.remove('selected'));document.getElementById('cv2').value=inp.value;upPrev('prev2','hex2',inp.value);}
 
-// Redirect URL
-document.getElementById('next-url').value = window.location.origin + '/merci.html';
+// Redirect
+document.getElementById('next-url').value=window.location.origin+'/merci.html';
 
-// Submit validation
-document.getElementById('mainForm').addEventListener('submit', function(e) {
-  if(!selectedOffer) {
-    e.preventDefault();
-    alert('Merci de choisir une offre (étape 1).');
-    goTo(0);return;
-  }
-  const nom = document.getElementById('f-nom').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  if(!nom) { e.preventDefault(); alert('Merci de renseigner le nom du restaurant.'); goTo(1); return; }
-  if(!email) { e.preventDefault(); alert('Merci de renseigner votre email.'); goTo(1); return; }
-  const btn = this.querySelector('.btn-submit');
-  btn.textContent = 'Envoi en cours...';
-  btn.disabled = true;
-  setTimeout(() => { btn.textContent='Envoyer le formulaire ✓'; btn.disabled=false; }, 10000);
+// Submit
+document.getElementById('mainForm').addEventListener('submit',function(e){
+  if(!selOffer){e.preventDefault();alert('Choisissez une offre (étape 1).');goTo(0);return;}
+  if(!document.getElementById('f-nom').value.trim()){e.preventDefault();alert('Renseignez le nom du restaurant.');goTo(1);return;}
+  if(!document.getElementById('f-email').value.trim()){e.preventDefault();alert('Renseignez votre email.');goTo(1);return;}
+  const btn=this.querySelector('.btn-submit');
+  btn.textContent='Envoi en cours...';btn.disabled=true;
+  setTimeout(()=>{btn.textContent='Envoyer le formulaire ✓';btn.disabled=false;},10000);
 });
 </script>
 </body>
